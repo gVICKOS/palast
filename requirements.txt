@@ -4,8 +4,8 @@ numpy
 matplotlib
 seaborn
 scikit-learn
-tensorflow==2.7.0
+tensorflow
 pillow
 openpyxl
-keras==2.7.0
+keras
 joblib
