@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pickle 
+import joblib
 from sklearn import preprocessing
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
@@ -134,7 +135,8 @@ def main():
     st.markdown("*Choisissez les caractéristiques du client ensuite cliquez sur le bouton Prédire.*") 
         
     # Importer le modèle 
-    load_model=pickle.load(open('prediction_pa.pkl','rb'))
+    load_model= joblib.load('model.joblib')
+    #load_model=pickle.load(open('prediction_pa.pkl','rb'))
     
     # Appliquer le modèle sur les données en entrée 
     if st.button("Prédire"):
