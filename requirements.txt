@@ -8,3 +8,4 @@ tensorflow==2.7.0
 pillow
 openpyxl
 keras==2.7.0
+joblib
