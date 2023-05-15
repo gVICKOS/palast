@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-import pickle 
 import joblib
 from sklearn import preprocessing
 from sklearn.neighbors import KNeighborsClassifier
@@ -136,7 +135,6 @@ def main():
         
     # Importer le modèle 
     load_model= joblib.load('model.joblib')
-    #load_model=pickle.load(open('prediction_pa.pkl','rb'))
     
     # Appliquer le modèle sur les données en entrée 
     if st.button("Prédire"):
