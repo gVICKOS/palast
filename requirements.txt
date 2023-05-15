@@ -9,3 +9,4 @@ pillow
 openpyxl
 keras
 joblib
+pickle
