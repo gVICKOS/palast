@@ -7,3 +7,4 @@ scikit-learn
 tensorflow
 pillow
 openpyxl
+keras
