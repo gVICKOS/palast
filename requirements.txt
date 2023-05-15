@@ -8,3 +8,4 @@ tensorflow
 pillow
 openpyxl
 keras
+pickle
