@@ -28,6 +28,10 @@ from tensorflow.keras.optimizers import Adam
 from sklearn.metrics import r2_score
 from PIL import Image
 
+# loading the trained model
+pickle_in = open('mymodel.pkl', 'rb') 
+load_model = pickle.load(pickle_in)
+
 
 def main():
     #st.image("Logo-HD-eni-EGS.jpg", width=100, caption="Your Picture Caption")
@@ -135,7 +139,7 @@ def main():
     st.markdown("*Choisissez les caractéristiques du client ensuite cliquez sur le bouton Prédire.*") 
         
     # Importer le modèle 
-    load_model= joblib.load('model.joblib')
+    #load_model= joblib.load('model.joblib')
     
     # Appliquer le modèle sur les données en entrée 
     if st.button("Prédire"):
