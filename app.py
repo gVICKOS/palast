@@ -27,12 +27,13 @@ from tensorflow.keras.layers import Dense
 from tensorflow.keras.optimizers import Adam
 from sklearn.metrics import r2_score
 from PIL import Image
+import joblib
 
 # loading the trained model
-def try_model():
-    with open('mymodel.pkl', 'rb') as file:
-        model= pickle.load(file)
-    return model
+#def try_model():
+ #   with open('mymodel.pkl', 'rb') as file:
+  #      model= pickle.load(file)
+   # return model
 
 #pickle_in = open('mymodel.pkl', 'rb') 
 #load_model = pickle.load(pickle_in)
@@ -144,8 +145,8 @@ def main():
     st.markdown("*Choisissez les caractéristiques du client ensuite cliquez sur le bouton Prédire.*") 
         
     # Importer le modèle 
-    #load_model= joblib.load('model.joblib')
-    load_model = try_model()
+    load_model= joblib.load('model.joblib')
+    
     
     # Appliquer le modèle sur les données en entrée 
     if st.button("Prédire"):
