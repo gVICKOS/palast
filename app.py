@@ -145,7 +145,7 @@ def main():
     st.markdown("*Choisissez les caractéristiques du client ensuite cliquez sur le bouton Prédire.*") 
         
     # Importer le modèle 
-    load_model= joblib.load('model.joblib')
+    load_model= pickle.load(open('prediction_pa.sav', 'rb'))
     
     
     # Appliquer le modèle sur les données en entrée 
