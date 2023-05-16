@@ -29,8 +29,13 @@ from sklearn.metrics import r2_score
 from PIL import Image
 
 # loading the trained model
-pickle_in = open('mymodel.pkl', 'rb') 
-load_model = pickle.load(pickle_in)
+def load_model():
+    with open('mymodel.pkl', 'rb') as file:
+        model= pickle.load(file)
+    return model
+
+#pickle_in = open('mymodel.pkl', 'rb') 
+#load_model = pickle.load(pickle_in)
 
 
 def main():
@@ -140,6 +145,7 @@ def main():
         
     # Importer le modèle 
     #load_model= joblib.load('model.joblib')
+    load_model = load_model()
     
     # Appliquer le modèle sur les données en entrée 
     if st.button("Prédire"):
