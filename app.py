@@ -158,8 +158,8 @@ def main():
     X.loc[:,num_c] = std_sc.transform(X.loc[:,num_c])
     data_enc1 = pd.get_dummies(X, drop_first=True)
     X_train,X_test,y_train,y_test= train_test_split(data_enc1,y, test_size=0.1, random_state=123)
-    X_train = np.asarray(X_train).astype(np.float32)
-    y_train = np.asarray(y_train).astype(np.float32)
+    X_train = X_train.astype(np.float32)
+    y_train = y_train.astype(np.float32)
    
     # Define model architecture
     model = Sequential()
