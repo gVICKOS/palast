@@ -63,6 +63,9 @@ def main():
         dataclean['Contrat6Mois']= dataclean['Contrat6Mois'].replace('Oui', 'Yes', regex=True)
         dataclean['Contrat6Mois']= dataclean['Contrat6Mois'].replace('Non', 'No', regex=True)
         return dataclean
+    dataclean= load_data()
+        
+
     ## Affichage de la table de données 
     df= load_data()
     
@@ -145,12 +148,33 @@ def main():
     st.markdown("*Choisissez les caractéristiques du client ensuite cliquez sur le bouton Prédire.*") 
         
     # Importer le modèle 
-    load_model= pickle.load(open('prediction_pa.pkl', 'rb'))
+    dataclean.drop(dataclean.columns[[2,5,10,11,14,15,16]], axis=1, inplace=True)
+    y= dataclean['Mt_versement']
+    X= dataclean.drop('Mt_versement',axis=1)
+    df_cat = X.select_dtypes(include=['object'])
+    df_int = X.select_dtypes(exclude=['object'])
+    num_cols = X.select_dtypes(exclude=["object"]).columns
+    std_scaler = preprocessing.StandardScaler()
+    std_scaler.fit(X.loc[:,num_cols])
+    X.loc[:,num_cols] = std_scaler.transform(X.loc[:,num_cols])
+    data_enc = pd.get_dummies(X, drop_first=True)
+    X_train,X_test,y_train,y_test= train_test_split(data_enc,y, test_size=0.1, random_state=123)
+   
+    # Define model architecture
+    model = Sequential()
+    model.add(Dense(32, input_dim=X_train.shape[1], activation='relu'))
+    model.add(Dense(32, activation='relu'))
+    model.add(Dense(1))
+    # Compile the model
+    optimizer = Adam(learning_rate=0.002)
+    model.compile(loss='mean_squared_error', optimizer=optimizer, metrics=['mean_squared_error', 'mean_absolute_error'])
+    # Train the model
+    model.fit(X_train, y_train, epochs=100, batch_size=32, validation_data=(X_test, y_test))
     
     
     # Appliquer le modèle sur les données en entrée 
     if st.button("Prédire"):
-        prevision= load_model.predict(donnee_finale)
+        prevision= model.predict(donnee_finale)
         rounded = [float(np.round(x)) for x in prevision]
         my_float = float(rounded[0])
         resultat= "Le montant à proposer pour ce client est égal à : " + str(my_float) + "€"
