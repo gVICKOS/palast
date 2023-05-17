@@ -158,19 +158,21 @@ def main():
     X.loc[:,num_c] = std_sc.transform(X.loc[:,num_c])
     data_enc1 = pd.get_dummies(X, drop_first=True)
     X_train,X_test,y_train,y_test= train_test_split(data_enc1,y, test_size=0.1, random_state=123)
-    X_train = X_train.astype(np.float32)
-    y_train = y_train.astype(np.float32)
+    X_traint= tensorflow.convert_to_tensor(np.array(X_train).astype(np.float32)
+    y_traint= tensorflow.convert_to_tensor(np.array(y_train).astype(np.float32)
+    #X_train = X_train.astype(np.float32)
+    #y_train = y_train.astype(np.float32)
    
     # Define model architecture
     model = Sequential()
-    model.add(Dense(32, input_dim=X_train.shape[1], activation='relu'))
+    model.add(Dense(32, input_dim=X_traint.shape[1], activation='relu'))
     model.add(Dense(32, activation='relu'))
     model.add(Dense(1))
     # Compile the model
     optimizer = Adam(learning_rate=0.002)
     model.compile(loss='mean_squared_error', optimizer=optimizer, metrics=['mean_squared_error', 'mean_absolute_error'])
     # Train the model
-    model.fit(X_train, y_train, epochs=100, batch_size=32, validation_data=(X_test, y_test))
+    model.fit(X_traint, y_traint, epochs=100, batch_size=32, validation_data=(X_test, y_test))
     
     
     # Appliquer le modèle sur les données en entrée 
