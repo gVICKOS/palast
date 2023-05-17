@@ -160,6 +160,7 @@ def main():
     X_train,X_test,y_train,y_test= train_test_split(data_enc1,y, test_size=0.1, random_state=123)
     X_traint= tensorflow.convert_to_tensor(np.array(X_train).astype(np.float32)
     y_traint= tensorflow.convert_to_tensor(np.array(y_train).astype(np.float32)
+                                           
     #X_train = X_train.astype(np.float32)
     #y_train = y_train.astype(np.float32)
    
