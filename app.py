@@ -62,8 +62,9 @@ def main():
         dataclean.drop(dataclean.columns[[2,5,10,11,14,15,16]], axis=1, inplace=True)
         dataclean['Contrat6Mois']= dataclean['Contrat6Mois'].replace('Oui', 'Yes', regex=True)
         dataclean['Contrat6Mois']= dataclean['Contrat6Mois'].replace('Non', 'No', regex=True)
+        dataclean.drop(dataclean.columns[[2,5,10,11,14,15,16]], axis=1, inplace=True)
         return dataclean
-    dataclean= load_data()
+    datac= load_data()
         
 
     ## Affichage de la table de données 
@@ -148,9 +149,8 @@ def main():
     st.markdown("*Choisissez les caractéristiques du client ensuite cliquez sur le bouton Prédire.*") 
         
     # Importer le modèle 
-    dataclean.drop(dataclean.columns[[2,5,10,11,14,15,16]], axis=1, inplace=True)
-    y= dataclean['Mt_versement']
-    X= dataclean.drop('Mt_versement',axis=1)
+    y= datac['Mt_versement']
+    X= datac.drop('Mt_versement',axis=1)
     df_cat = X.select_dtypes(include=['object'])
     df_int = X.select_dtypes(exclude=['object'])
     num_cols = X.select_dtypes(exclude=["object"]).columns
