@@ -62,7 +62,6 @@ def main():
         dataclean.drop(dataclean.columns[[2,5,10,11,14,15,16]], axis=1, inplace=True)
         dataclean['Contrat6Mois']= dataclean['Contrat6Mois'].replace('Oui', 'Yes', regex=True)
         dataclean['Contrat6Mois']= dataclean['Contrat6Mois'].replace('Non', 'No', regex=True)
-        dataclean.drop(dataclean.columns[[2,5,10,11,14,15,16]], axis=1, inplace=True)
         return dataclean
     datac= load_data()
         
