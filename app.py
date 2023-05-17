@@ -150,14 +150,14 @@ def main():
     # Importer le modèle 
     y= datac['Mt_versement']
     X= datac.drop('Mt_versement',axis=1)
-    df_cat = X.select_dtypes(include=['object'])
-    df_int = X.select_dtypes(exclude=['object'])
-    num_cols = X.select_dtypes(exclude=["object"]).columns
-    std_scaler = preprocessing.StandardScaler()
-    std_scaler.fit(X.loc[:,num_cols])
-    X.loc[:,num_cols] = std_scaler.transform(X.loc[:,num_cols])
-    data_enc = pd.get_dummies(X, drop_first=True)
-    X_train,X_test,y_train,y_test= train_test_split(data_enc,y, test_size=0.1, random_state=123)
+    #df_cat = X.select_dtypes(include=['object'])
+    #df_int = X.select_dtypes(exclude=['object'])
+    num_c = X.select_dtypes(exclude=["object"]).columns
+    std_sc = preprocessing.StandardScaler()
+    std_sc.fit(X.loc[:,num_c])
+    X.loc[:,num_c] = std_sc.transform(X.loc[:,num_c])
+    data_enc1 = pd.get_dummies(X, drop_first=True)
+    X_train,X_test,y_train,y_test= train_test_split(data_enc1,y, test_size=0.1, random_state=123)
    
     # Define model architecture
     model = Sequential()
