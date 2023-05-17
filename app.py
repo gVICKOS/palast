@@ -179,10 +179,11 @@ def main():
     # Train the model
     model.fit(X_traint, y_traint, epochs=100, batch_size=32, validation_data=(X_testt, y_testt))
     
-    
+    donnee_fin= tf.convert_to_tensor(np.array(donnee_finale).astype(np.float64))
+     
     # Appliquer le modèle sur les données en entrée 
     if st.button("Prédire"):
-        prevision= model.predict(donnee_finale)
+        prevision= model.predict(donnee_fin)
         rounded = [float(np.round(x)) for x in prevision]
         my_float = float(rounded[0])
         resultat= "Le montant à proposer pour ce client est égal à : " + str(my_float) + "€"
